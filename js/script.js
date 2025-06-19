@@ -84,8 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasFamilyAllowanceInput = document.getElementById('hasFamilyAllowance');
     const startDateInput = document.getElementById('startDate');
     const endDateInput = document.getElementById('endDate');
-    const hasCTSInput = document.getElementById('hasCTS');
-    const hasVacationsInput = document.getElementById('hasVacations');
     const workTypeInput = document.getElementById('workType');
     const calculatorResults = document.getElementById('calculatorResults');
 
@@ -175,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Se calcula por 1/12 de la remuneración computable por cada mes completo de servicios,
         // considerando mes completo si se laboró al menos 15 días en el mes.
         // La regla general de vacaciones es 30 días por año completo. Si no se completa el año, se paga por 30avos por cada día.
-        // Para simplificar, si no ha completado el ciclo anual de 12 meses, se calcula proporcionalmente.
+        // Para simplificar, si no ha completado el ciclo anual de 12 meses, se paga proporcionalmente.
         let daysForVacation = totalDaysOverall; // Total de días trabajados
         if (!hasVacationsInput.checked && daysForVacation > 0) {
             // Vacaciones proporcionales: 30 días de vacación por cada año completo de servicio (365.25 días).
