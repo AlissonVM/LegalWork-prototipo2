@@ -118,12 +118,17 @@ a:hover {
 
 .logo {
     margin: 0;
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Esto solo afecta si el logo es texto */
 }
 
 .logo a {
     color: #007bff;
     font-weight: 700;
+}
+
+.logo img { /* Estilo para la imagen del logo */
+    height: 40px; /* O el tamaño que necesites */
+    vertical-align: middle;
 }
 
 .main-nav ul {
