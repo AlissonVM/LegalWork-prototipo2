@@ -1,110 +1,96 @@
-/* --- Global Styles & Typography --- */
+/* Variables de Colores basadas en tu logo */
+:root {
+    --primary-blue: #0B3050; /* Azul oscuro del logo */
+    --secondary-gold: #C2A44B; /* Dorado/Bronce del logo */
+    --text-color: #333333; /* Color de texto general oscuro */
+    --light-gray: #F5F5F5; /* Fondo suave para secciones */
+    --white: #FFFFFF;
+    --dark-gray: #555555; /* Gris para textos secundarios */
+    --light-blue: #EBF2F6; /* Un azul muy claro para fondos de algunas cards */
+}
+
+/* Estilos Generales */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f4f7f6; /* Un gris muy claro para el fondo */
-    color: #333;
     line-height: 1.6;
+    color: var(--text-color); /* Usamos la variable para el color de texto */
+    background-color: var(--white);
 }
 
 .container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    color: #0056b3; /* Azul más oscuro para los títulos principales */
-}
-
-h2.section-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #0056b3;
-}
-
-p.section-description {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 50px auto;
-    color: #555;
-    font-size: 1.1rem;
+h1, h2, h3 {
+    font-weight: 600;
+    color: var(--primary-blue); /* Títulos en azul principal */
 }
 
 a {
     text-decoration: none;
-    color: #007bff; /* Azul vibrante para enlaces */
-    transition: color 0.3s ease;
+    color: var(--primary-blue); /* Enlaces en azul principal */
 }
 
-a:hover {
-    color: #0056b3;
-}
-
+/* Botones */
 .btn {
     display: inline-block;
     padding: 12px 25px;
     border-radius: 5px;
     font-weight: 600;
     text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
+    border: none; /* Eliminar borde por defecto de botones */
 }
 
 .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: 1px solid #007bff;
+    background-color: var(--primary-blue); /* Botón principal en azul oscuro */
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #08253D; /* Un tono más oscuro de azul al pasar el ratón */
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-    border: 1px solid #6c757d;
+    background-color: var(--secondary-gold); /* Botón secundario en dorado */
+    color: var(--white);
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #5a6268;
+    background-color: #A38C3F; /* Un tono más oscuro de dorado al pasar el ratón */
 }
 
-.btn-tertiary { /* Nuevo botón para "Contáctanos para Empresas" */
-    background-color: #28a745; /* Un verde para diferenciar */
-    color: #fff;
-    border: 1px solid #28a745;
+.btn-tertiary {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
 }
 
 .btn-tertiary:hover {
-    background-color: #218838;
-    border-color: #218838;
+    background-color: var(--primary-blue);
+    color: var(--white);
 }
 
-/* Para botones de descarga deshabilitados (Premium) */
-.btn-download.disabled {
-    background-color: #cccccc;
+/* Estado deshabilitado para botones */
+.btn.disabled {
+    opacity: 0.6;
     cursor: not-allowed;
-    border-color: #cccccc;
-}
-
-.btn-download.disabled:hover {
-    background-color: #bbbbbb;
+    background-color: var(--dark-gray); /* Gris para botones deshabilitados */
+    color: var(--light-gray);
 }
 
 
-/* --- Header --- */
+/* Header */
 .main-header {
-    background-color: #fff;
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--white); /* Header en blanco */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -114,20 +100,11 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0; /* Ajuste para un header más compacto */
 }
 
-.logo {
-    margin: 0;
-    font-size: 1.8rem; /* Esto solo afecta si el logo es texto */
-}
-
-.logo a {
-    color: #007bff;
-    font-weight: 700;
-}
-
-.logo img { /* Estilo para la imagen del logo */
-    height: 40px; /* O el tamaño que necesites */
+.logo img {
+    height: 50px; /* Ajusta el tamaño del logo si es necesario */
     vertical-align: middle;
 }
 
@@ -136,464 +113,407 @@ a:hover {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 25px;
+    gap: 25px; /* Espacio entre los elementos de navegación */
 }
 
-.main-nav ul li a {
-    color: #555;
+.main-nav a {
+    color: var(--primary-blue); /* Enlaces de navegación en azul */
     font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-    padding: 5px 0;
+    transition: color 0.3s ease;
 }
 
-.main-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    display: block;
-    margin-top: 5px;
-    right: 0;
-    background: #007bff;
-    transition: width 0.3s ease;
+.main-nav a:hover {
+    color: var(--secondary-gold); /* Cambio de color al pasar el ratón a dorado */
 }
 
-.main-nav ul li a:hover::after {
-    width: 100%;
-    left: 0;
-    background: #007bff;
+.btn-login {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 8px 18px; /* Ajuste para el botón de login */
+    border-radius: 5px;
+    font-weight: 500;
+    margin-left: 20px; /* Espacio con los otros elementos de navegación */
 }
 
-.main-nav .btn-login {
-    padding: 8px 18px; /* Ajuste para el botón en la navegación */
-    margin-left: 10px; /* Espacio para el botón de login */
+.btn-login:hover {
+    background-color: #08253D;
 }
 
 
-/* --- Hero Section --- */
+/* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.8)), url('https://via.placeholder.com/1500x800/007bff/ffffff?text=LegalWork+Background') no-repeat center center/cover;
-    color: #fff;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero-bg.jpg') no-repeat center center/cover; /* Asegúrate de que hero-bg.jpg exista en images */
+    color: var(--white);
     text-align: center;
     padding: 100px 20px;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 500px;
 }
 
 .hero-content h2 {
-    font-size: 3.5rem;
+    font-size: 3em;
     margin-bottom: 20px;
-    color: #fff; /* Título en blanco para el hero */
-    line-height: 1.2;
+    color: var(--white); /* Título del hero en blanco */
 }
 
 .hero-content p {
-    font-size: 1.3rem;
-    max-width: 800px;
-    margin: 0 auto 40px auto;
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.hero-content .btn-primary {
-    font-size: 1.2rem;
+.btn-start {
+    font-size: 1.1em;
     padding: 15px 35px;
 }
 
-
-/* --- Sections Padding --- */
+/* Sections */
 .section-padding {
     padding: 80px 0;
 }
 
+.section-title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+}
 
-/* --- About Section --- */
+.section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 1.1em;
+    color: var(--dark-gray);
+}
+
+/* About Section */
+.about-section {
+    background-color: var(--light-gray); /* Fondo gris claro */
+}
+
 .about-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    text-align: center;
 }
 
 .about-cards .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: var(--white);
     padding: 30px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
 }
 
 .about-cards .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .about-cards .card h3 {
-    font-size: 1.6rem;
-    color: #007bff;
+    font-size: 1.5em;
     margin-bottom: 15px;
+    color: var(--secondary-gold); /* Títulos de tarjeta en dorado */
 }
 
-.about-cards .card p {
-    color: #666;
-    font-size: 1rem;
+/* Services Section */
+.services-section {
+    background-color: var(--white); /* Fondo blanco */
 }
 
-
-/* --- Services Section --- */
 .service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    text-align: center;
 }
 
 .service-item {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: var(--light-blue); /* Fondo azul claro para cards de servicio */
     padding: 30px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
 }
 
 .service-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.service-item img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
+/* Estilos para los emojis */
+.service-icon {
+    font-size: 3em; /* Tamaño grande para los emojis */
+    margin-bottom: 15px;
+    display: block; /* Para que el emoji ocupe su propia línea */
+    line-height: 1; /* Eliminar espacio extra vertical del emoji */
 }
 
 .service-item h3 {
-    font-size: 1.5rem;
-    color: #007bff;
+    font-size: 1.4em;
+    margin-top: 15px;
     margin-bottom: 10px;
+    color: var(--primary-blue);
 }
 
 .service-item p {
-    color: #666;
-    font-size: 0.95rem;
+    font-size: 1em;
+    color: var(--dark-gray);
 }
 
 
-/* --- Calculator Section --- */
+/* Calculator Section */
+.calculator-section {
+    background-color: var(--light-gray); /* Fondo gris claro */
+}
+
 .calculator-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
     padding: 40px;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-    gap: 30px; /* Espacio entre el formulario y los resultados */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
 }
 
-.calculator-form {
-    flex: 1; /* Ocupa el espacio disponible */
-    min-width: 300px; /* Ancho mínimo para el formulario */
+@media (min-width: 768px) {
+    .calculator-card {
+        grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas grandes */
+    }
 }
 
-.calculator-input-group {
+.calculator-form .calculator-input-group {
     margin-bottom: 20px;
 }
 
-.calculator-input-group label {
+.calculator-form label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
+    font-weight: 500;
+    color: var(--dark-gray);
 }
 
-.calculator-input-group input[type="number"],
-.calculator-input-group input[type="date"],
-.calculator-input-group select {
-    width: calc(100% - 20px); /* Ajuste para el padding */
-    padding: 12px 10px;
+.calculator-form input[type="number"],
+.calculator-form input[type="date"],
+.calculator-form select {
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1rem;
-    color: #555;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluir padding y borde en el ancho total */
 }
 
-/* Estilos para el checkbox-group */
-.calculator-input-group.checkbox-group {
+.calculator-form input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.calculator-form .checkbox-group {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.calculator-input-group.checkbox-group input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 1px solid #007bff;
-    appearance: none; /* Oculta la apariencia por defecto */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border-radius: 3px;
-    cursor: pointer;
-    position: relative;
-    outline: none;
-}
-
-.calculator-input-group.checkbox-group input[type="checkbox"]:checked {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.calculator-input-group.checkbox-group input[type="checkbox"]:checked::after {
-    content: '\2713'; /* Símbolo de check */
-    display: block;
-    color: #fff;
-    font-size: 16px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.calculator-input-group.checkbox-group label {
-    margin-bottom: 0; /* Ajuste para alinear con el checkbox */
-    cursor: pointer;
-}
-
-
-.calculator-card .btn-primary {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .calculator-results {
-    flex: 1; /* Ocupa el espacio disponible */
-    min-width: 300px; /* Ancho mínimo para los resultados */
-    background-color: #e9f5ff; /* Fondo azul claro para resultados */
-    border-radius: 8px;
+    background-color: var(--light-gray); /* Fondo de resultados gris claro */
     padding: 30px;
-    border: 1px solid #cce0ff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para empujar el total hacia abajo */
 }
 
 .calculator-results h3 {
-    color: #0056b3;
+    font-size: 1.8em;
+    margin-top: 0;
     margin-bottom: 25px;
-    font-size: 1.8rem;
-    text-align: center;
+    color: var(--primary-blue);
 }
 
 .calculator-results p {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px dashed #cce0ff;
-    padding-bottom: 10px;
-}
-
-.calculator-results p:last-of-type {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.calculator-results span {
-    font-weight: 600;
-    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: var(--dark-gray);
 }
 
 .calculator-results .result-breakdown {
-    margin-top: 20px;
+    border-top: 1px solid #eee;
     padding-top: 20px;
-    border-top: 2px dashed #aedbff;
-}
-
-.calculator-results .result-breakdown p {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: #666;
-    border-bottom: none;
-    padding-bottom: 0;
+    margin-top: 20px;
 }
 
 .calculator-results .total-amount {
-    font-size: 1.5rem;
+    font-size: 1.6em;
     font-weight: 700;
-    color: #0056b3;
+    color: var(--primary-blue);
     margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid #007bff;
-}
-
-.calculator-results .total-amount span {
-    font-size: 1.8rem;
-    color: #28a745; /* Verde para el total */
+    text-align: right;
 }
 
 .calculator-results .disclaimer {
-    font-size: 0.9rem;
-    color: #888;
-    margin-top: 20px;
-    text-align: center;
+    font-size: 0.9em;
+    color: var(--dark-gray);
+    margin-top: 15px;
+    text-align: justify;
 }
 
 
-/* --- Models Section --- */
+/* Models Section */
+.models-section {
+    background-color: var(--white);
+}
+
 .model-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
 }
 
 .model-item {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    padding: 25px;
+    background-color: var(--light-gray); /* Fondo gris claro para cards de modelos */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     text-align: center;
-    display: flex;
+    display: flex; /* Usar flexbox para alinear contenido */
     flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    justify-content: space-between; /* Empuja el botón hacia abajo */
+    transition: transform 0.3s ease;
 }
 
 .model-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .model-item h3 {
-    font-size: 1.4rem;
-    color: #007bff;
+    font-size: 1.4em;
     margin-bottom: 10px;
+    color: var(--primary-blue);
 }
 
 .model-item p {
-    color: #666;
-    font-size: 0.95rem;
-    flex-grow: 1; /* Para que el párrafo ocupe el espacio y los botones se alineen */
-    margin-bottom: 20px;
+    font-size: 0.95em;
+    color: var(--dark-gray);
+    flex-grow: 1; /* Permite que el párrafo crezca y empuje el botón */
+    margin-bottom: 20px; /* Espacio antes del botón */
 }
 
+/* Ajuste específico para los botones de descarga en la sección de modelos */
 .model-item .btn-download {
-    width: 100%;
-    margin-top: auto; /* Empuja el botón hacia abajo */
+    width: 100%; /* El botón ocupa todo el ancho de la tarjeta */
+    margin-top: auto; /* Asegura que el botón se pegue abajo si es necesario */
 }
 
 
-/* --- Chatbot Section --- */
+/* Chatbot Section */
+.chatbot-section {
+    background-color: var(--light-blue); /* Fondo azul muy claro */
+}
+
 .chatbot-container {
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     max-width: 700px;
     margin: 0 auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 500px; /* Altura fija para el chat */
-    overflow: hidden;
+    min-height: 500px; /* Altura mínima para el chatbot */
 }
 
 .chat-display {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    border-bottom: 1px solid #eee;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .message {
-    max-width: 80%;
     padding: 10px 15px;
-    border-radius: 18px;
-    font-size: 0.95rem;
-    line-height: 1.4;
-}
-
-.user-message {
-    background-color: #007bff;
-    color: #fff;
-    align-self: flex-end; /* Alinea los mensajes del usuario a la derecha */
-    border-bottom-right-radius: 2px;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
 }
 
 .bot-message {
-    background-color: #e9e9eb;
-    color: #333;
-    align-self: flex-start; /* Alinea los mensajes del bot a la izquierda */
-    border-bottom-left-radius: 2px;
+    background-color: var(--light-gray); /* Mensajes del bot en gris claro */
+    align-self: flex-start;
+    color: var(--text-color);
 }
 
-.bot-message a {
-    color: #0056b3; /* Color de enlace en mensaje del bot */
-    font-weight: 600;
+.user-message {
+    background-color: var(--primary-blue); /* Mensajes del usuario en azul */
+    color: var(--white);
+    align-self: flex-end;
 }
 
 .chat-input-area {
     display: flex;
-    padding: 15px;
+    padding: 20px;
     border-top: 1px solid #eee;
 }
 
-.chat-input-area input[type="text"] {
+.chat-input-area input {
     flex-grow: 1;
-    padding: 12px 15px;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 25px;
     margin-right: 10px;
-    font-size: 1rem;
-    outline: none;
+    font-size: 1em;
 }
 
 .chat-input-area button {
-    padding: 12px 20px;
+    padding: 12px 25px;
     border-radius: 25px;
 }
 
 
-/* --- Premium Section --- */
+/* Premium Section */
+.premium-section {
+    background-color: var(--white);
+}
+
 .premium-plans-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    text-align: center;
 }
 
 .premium-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--light-gray); /* Fondo gris claro para cards premium */
+    padding: 35px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .premium-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-7px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .premium-card h3 {
-    font-size: 1.8rem;
-    color: #0056b3;
-    margin-bottom: 20px;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: var(--primary-blue);
 }
 
 .premium-card .price {
-    font-size: 2.2rem;
+    font-size: 2.5em;
     font-weight: 700;
-    color: #333;
+    color: var(--secondary-gold); /* Precio en dorado */
     margin-bottom: 25px;
 }
 
@@ -601,230 +521,194 @@ a:hover {
     list-style: none;
     padding: 0;
     margin-bottom: 30px;
-    flex-grow: 1; /* Permite que la lista ocupe el espacio disponible */
-    text-align: left; /* Alinea los ítems de la lista a la izquierda */
+    text-align: left;
+    flex-grow: 1; /* Permite que la lista de características crezca */
 }
 
 .premium-card ul li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    color: #555;
-    position: relative; /* Para el icono de check */
-    padding-left: 25px; /* Espacio para el icono */
+    margin-bottom: 10px;
+    font-size: 1.05em;
+    color: var(--dark-gray);
 }
 
-.premium-card ul li:last-child {
-    border-bottom: none;
-}
-
-/* Icono de check para los ítems de lista */
 .premium-card ul li::before {
-    content: '\2713'; /* Unicode para el checkmark */
-    color: #28a745; /* Verde para el check */
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 10px;
+    content: "✔️"; /* Checkmark antes de cada item */
+    margin-right: 10px;
+    color: var(--secondary-gold); /* Checkmark en dorado */
 }
-
 
 .premium-card .btn {
     width: 100%;
-    margin-top: auto; /* Empuja el botón hacia abajo */
+    margin-top: auto; /* Asegura que el botón se pegue abajo */
 }
 
-/* Estilos específicos para el plan gratuito */
-.free-plan {
-    border: 1px solid #ddd;
+.premium-card.free-plan {
+    border: 2px solid var(--secondary-gold); /* Borde dorado para el plan gratuito */
 }
 
-.free-plan h3 {
-    color: #333;
+.premium-card.premium-plan {
+    background-color: var(--primary-blue); /* Fondo azul para el plan premium */
+    color: var(--white); /* Texto del plan premium en blanco */
 }
 
-/* Estilos específicos para el plan premium (resaltado) */
-.premium-plan {
-    border: 2px solid #007bff; /* Color primario */
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2);
+.premium-card.premium-plan h3,
+.premium-card.premium-plan ul li,
+.premium-card.premium-plan .price {
+    color: var(--white); /* Asegurar que todo el texto sea blanco en el premium card */
 }
 
-.premium-plan h3 {
-    color: #007bff;
+.premium-card.premium-plan ul li::before {
+    color: var(--secondary-gold); /* Checkmark dorado */
 }
 
-/* Estilos para el plan de empresas */
-.enterprise-plan {
-    border: 1px dashed #6c757d; /* Borde punteado para indicar "personalizado" */
+.premium-card.premium-plan .btn {
+    background-color: var(--secondary-gold); /* Botón del plan premium en dorado */
+    color: var(--primary-blue);
 }
 
-.enterprise-plan h3 {
-    color: #6c757d;
+.premium-card.premium-plan .btn:hover {
+    background-color: #A38C3F;
+    color: var(--white);
 }
 
-.enterprise-plan .btn-tertiary {
-    background-color: #6c757d;
-    color: #fff;
-    border: 1px solid #6c757d;
+.premium-card.enterprise-plan {
+    border: 2px dashed var(--dark-gray); /* Borde punteado para empresas */
 }
 
-.enterprise-plan .btn-tertiary:hover {
-    background-color: #5a6268;
+.premium-card.enterprise-plan h3,
+.premium-card.enterprise-plan .price {
+    color: var(--primary-blue);
 }
 
-
-/* --- Footer --- */
+/* Footer */
 .main-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 30px 0;
+    background-color: var(--primary-blue); /* Fondo del footer en azul oscuro */
+    color: var(--white);
     text-align: center;
-    font-size: 0.9rem;
+    padding: 30px 0;
+    font-size: 0.9em;
 }
 
-.main-footer .social-links {
-    margin-top: 15px;
+.main-footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
-.main-footer .social-links a {
-    display: inline-block;
+.social-links a {
     margin: 0 10px;
 }
 
-.main-footer .social-links img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%; /* Para hacer las imágenes circulares si son iconos */
+.social-links img {
+    height: 25px; /* Tamaño de los iconos sociales */
+    width: 25px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%); /* Hace los iconos blancos */
     transition: transform 0.3s ease;
 }
 
-.main-footer .social-links img:hover {
+.social-links img:hover {
     transform: scale(1.1);
 }
 
-
-/* --- Modals --- */
+/* Modals */
 .modal {
     display: none; /* Oculto por defecto */
-    position: fixed; /* Posición fija para cubrir toda la pantalla */
-    z-index: 2000; /* Por encima de todo */
+    position: fixed; /* Permanece en su lugar */
+    z-index: 2000; /* Se sienta encima de todo */
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Permite scroll si el contenido es muy grande */
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente oscuro */
-    justify-content: center; /* Centrar horizontalmente con flexbox */
-    align-items: center; /* Centrar verticalmente con flexbox */
-    padding: 20px;
-    box-sizing: border-box;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilitar scroll si es necesario */
+    background-color: rgba(0,0,0,0.6); /* Fondo semi-transparente negro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: auto; /* Auto margin para centrar en viejos navegadores */
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    background-color: var(--white);
+    margin: auto;
+    padding: 30px;
+    border-radius: 8px;
     width: 90%;
     max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     position: relative;
-    animation: fadeInScale 0.3s ease-out; /* Animación de entrada */
+    animation: fadeIn 0.3s ease-out;
 }
-
-/* Animación para el modal */
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
 
 .close-button {
-    color: #aaa;
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 35px;
+    color: var(--dark-gray);
+    font-size: 28px;
     font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
     cursor: pointer;
-    transition: color 0.3s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: #333;
+    color: var(--primary-blue);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .modal h2 {
     text-align: center;
-    color: #0056b3;
-    margin-bottom: 30px;
-    font-size: 2rem;
+    margin-bottom: 25px;
+    color: var(--primary-blue);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
+    font-weight: 500;
+    color: var(--dark-gray);
 }
 
+.form-group input[type="text"],
 .form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="text"] {
-    width: calc(100% - 22px); /* Ajuste para el padding y borde */
-    padding: 12px 10px;
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1rem;
-    color: #555;
+    font-size: 1em;
+    box-sizing: border-box;
 }
 
 .modal .btn-primary {
     width: 100%;
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    margin-top: 10px;
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 1.1em;
 }
 
 .modal-link {
     text-align: center;
-    margin-top: 20px;
-    font-size: 0.95rem;
+    margin-top: 15px;
+    font-size: 0.9em;
 }
 
 .modal-link a {
+    color: var(--primary-blue);
     font-weight: 600;
 }
 
-
-/* --- Responsive Design --- */
-@media (max-width: 992px) {
-    .main-nav ul {
-        gap: 15px;
-    }
-    .hero-content h2 {
-        font-size: 2.8rem;
-    }
-    .calculator-card {
-        flex-direction: column; /* Apila el formulario y los resultados */
-    }
-    .calculator-form, .calculator-results {
-        min-width: unset; /* Reinicia el min-width */
-        width: 100%; /* Ocupa todo el ancho disponible */
-    }
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Media Queries para Responsividad */
 @media (max-width: 768px) {
     .main-header .container {
         flex-direction: column;
@@ -832,56 +716,26 @@ a:hover {
     }
     .main-nav ul {
         flex-direction: column;
-        margin-top: 15px;
         gap: 10px;
+        margin-top: 15px;
     }
-    .main-nav ul li a {
-        padding: 5px 10px;
-    }
-    .main-nav .btn-login {
+    .btn-login {
         margin-left: 0;
-        margin-top: 10px;
-        width: 100%;
+        margin-top: 15px;
     }
     .hero-content h2 {
-        font-size: 2.2rem;
+        font-size: 2em;
     }
     .hero-content p {
-        font-size: 1rem;
+        font-size: 1em;
     }
     .section-title {
-        font-size: 2rem;
-    }
-    .section-description {
-        font-size: 1rem;
+        font-size: 2em;
     }
     .about-cards, .service-grid, .model-grid, .premium-plans-grid {
-        grid-template-columns: 1fr; /* Una columna en pantallas más pequeñas */
+        grid-template-columns: 1fr;
     }
-    .chatbot-container {
-        height: 400px; /* Reducir altura en móviles */
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-section {
-        padding: 60px 15px;
-    }
-    .hero-content h2 {
-        font-size: 1.8rem;
-    }
-    .hero-content .btn-primary {
-        padding: 12px 25px;
-        font-size: 1rem;
-    }
-    .calculator-card, .model-item, .premium-card {
-        padding: 25px;
-    }
-    .modal-content {
-        padding: 25px;
-    }
-    .close-button {
-        font-size: 30px;
-        right: 15px;
+    .main-footer .container {
+        flex-direction: column;
     }
 }
