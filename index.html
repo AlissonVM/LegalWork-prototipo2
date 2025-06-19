@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalWork - Tus Derechos Laborales a un Clic</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1 class="logo"><a href="#">LegalWork</a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about">Acerca de</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#calculator">Calculadora</a></li>
+                    <li><a href="#models">Modelos</a></li>
+                    <li><a href="#chatbot-section">Chatbot</a></li>
+                    <li><a href="#premium">Premium</a></li>
+                    <li><a href="#" class="btn-login">Iniciar Sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Protege tus Derechos Laborales, ¡Sin Complicaciones!</h2>
+                <p>LegalWork te ofrece información clara, herramientas útiles y asesoría experta para que conozcas y defiendas tus derechos en el trabajo.</p>
+                <a href="#registerModal" class="btn btn-primary btn-start">Comenzar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Acerca de LegalWork</h2>
+            <p class="section-description">Somos una plataforma innovadora dedicada a simplificar el acceso a la información y asesoría legal laboral en Perú.</p>
+            <div class="about-cards">
+                <div class="card">
+                    <h3>Misión</h3>
+                    <p>Empoderar a trabajadores y empleadores con conocimiento legal claro y herramientas prácticas.</p>
+                </div>
+                <div class="card">
+                    <h3>Visión</h3>
+                    <p>Ser la principal referencia digital para el derecho laboral en Perú, promoviendo relaciones laborales justas y equitativas.</p>
+                </div>
+                <div class="card">
+                    <h3>Valores</h3>
+                    <p>Accesibilidad, Claridad, Confianza, Innovación y Compromiso Social.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-description">Ofrecemos un conjunto de herramientas diseñadas para tus necesidades laborales.</p>
+            <div class="service-grid">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/60" alt="Chat Legal">
+                    <h3>Chat Legal Automatizado</h3>
+                    <p>Resuelve tus dudas legales laborales al instante con nuestro asistente inteligente.</p>
+                </div>
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/60" alt="Calculadora de Liquidación">
+                    <h3>Calculadora de Liquidación</h3>
+                    <p>Estima con precisión tu CTS, gratificaciones y vacaciones truncas.</p>
+                </div>
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/60" alt="Modelos Legales">
+                    <h3>Modelos Legales</h3>
+                    <p>Descarga plantillas profesionales para tus documentos laborales.</p>
+                </div>
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/60" alt="Asesoría Premium">
+                    <h3>Asesoría Premium</h3>
+                    <p>Accede a consultas personalizadas con abogados expertos y contenido exclusivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Calculadora de Liquidación</h2>
+            <p class="section-description">Estima tus beneficios laborales (CTS, Gratificaciones, Vacaciones Truncas).</p>
+            <div class="calculator-card">
+                <div class="calculator-form">
+                    <div class="calculator-input-group">
+                        <label for="salary">Sueldo Bruto Mensual (S/):</label>
+                        <input type="number" id="salary" placeholder="Ej: 1500" step="0.01" min="0" required>
+                    </div>
+                    <div class="calculator-input-group">
+                        <label for="hasFamilyAllowance">¿Recibes Asignación Familiar (S/ 102.50)?</label>
+                        <input type="checkbox" id="hasFamilyAllowance">
+                    </div>
+                    <div class="calculator-input-group">
+                        <label for="startDate">Fecha de Inicio de Labores:</label>
+                        <input type="date" id="startDate" required>
+                    </div>
+                    <div class="calculator-input-group">
+                        <label for="endDate">Fecha de Cese:</label>
+                        <input type="date" id="endDate" required>
+                    </div>
+                    <div class="calculator-input-group">
+                        <label for="workType">Tipo de Jornada:</label>
+                        <select id="workType" name="workType">
+                            <option value="full-time">Full-time (Jornada Completa)</option>
+                            <option value="part-time">Part-time (Tiempo Parcial)</option>
+                        </select>
+                    </div>
+                    <div class="calculator-input-group checkbox-group">
+                        <input type="checkbox" id="hasCTS">
+                        <label for="hasCTS">¿Ya te depositaron la última CTS?</label>
+                    </div>
+                    <div class="calculator-input-group checkbox-group">
+                        <input type="checkbox" id="hasVacations">
+                        <label for="hasVacations">¿Ya gozaste o te pagaron las últimas vacaciones completas?</label>
+                    </div>
+                    <button id="calculateBtn" class="btn btn-primary">Calcular Liquidación</button>
+                </div>
+                <div id="calculatorResults" class="calculator-results" style="display: none;">
+                    <h3>Resultados de tu Liquidación:</h3>
+                    <p>Tiempo de Servicio: <span id="serviceTime"></span></p>
+                    <p>Remuneración Computable Base: S/ <span id="baseSalary">0.00</span></p>
+                    <div class="result-breakdown">
+                        <p>Vacaciones Truncas: S/ <span id="vacationsAmount">0.00</span></p>
+                        <p>Gratificaciones Truncas: S/ <span id="gratificationAmount">0.00</span></p>
+                        <p>CTS Trunca: S/ <span id="ctsAmount">0.00</span></p>
+                        <p>Indemnización por Despido Arbitrario: S/ <span id="indemnizationAmount">0.00</span> <small>(Estimado, varía según caso)</small></p>
+                    </div>
+                    <p class="total-amount">TOTAL ESTIMADO DE LIQUIDACIÓN: S/ <span id="totalLiquidation">0.00</span></p>
+                    <p class="disclaimer">**Nota:** Este cálculo es una estimación. Para un cálculo exacto y personalizado, consulta con un abogado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="models" class="models-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Modelos de Documentos Legales</h2>
+            <p class="section-description">Descarga plantillas editables para tus trámites laborales.</p>
+            <div class="model-grid">
+                <div class="model-item">
+                    <h3>Carta de Renuncia Voluntaria</h3>
+                    <p>Formato estándar para presentar tu renuncia.</p>
+                    <a href="#" class="btn btn-secondary btn-download">Descargar Gratis</a>
+                </div>
+                <div class="model-item">
+                    <h3>Solicitud de Vacaciones</h3>
+                    <p>Modelo para solicitar el goce de tu periodo vacacional.</p>
+                    <a href="#" class="btn btn-secondary btn-download">Descargar Gratis</a>
+                </div>
+                <div class="model-item">
+                    <h3>Solicitud de Certificado de Trabajo</h3>
+                    <p>Pide tu constancia laboral al finalizar tu relación.</p>
+                    <a href="#" class="btn btn-secondary btn-download">Descargar Gratis</a>
+                </div>
+                <div class="model-item">
+                    <h3>Modelo de Contrato a Plazo Indefinido</h3>
+                    <p>Plantilla básica para formalizar una relación laboral. (Premium)</p>
+                    <a href="#" class="btn btn-secondary btn-download disabled">Descargar Premium</a>
+                </div>
+                 <div class="model-item">
+                    <h3>Modelo de Contrato Part-Time</h3>
+                    <p>Plantilla de contrato laboral para jornada parcial. (Premium)</p>
+                    <a href="#" class="btn btn-secondary btn-download disabled">Descargar Premium</a>
+                </div>
+                 <div class="model-item">
+                    <h3>Carta de Despido (Respuesta/Impugnación)</h3>
+                    <p>Guía para responder ante un despido. (Premium)</p>
+                    <a href="#" class="btn btn-secondary btn-download disabled">Descargar Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chatbot-section" class="chatbot-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Chatbot Legal</h2>
+            <p class="section-description">Pregúntale a nuestro asistente virtual sobre tus dudas laborales.</p>
+            <div class="chatbot-container">
+                <div id="chatDisplay" class="chat-display">
+                    <div class="message bot-message">¡Hola! Soy tu asistente de LegalWork. ¿En qué puedo ayudarte hoy con tus derechos laborales?</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
+                    <button id="sendMessageBtn" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="premium" class="premium-section section-padding">
+        <div class="container">
+            <h2 class="section-title">Planes de LegalWork</h2>
+            <p class="section-description">Elige el plan que mejor se adapte a tus necesidades.</p>
+            <div class="premium-plans-grid">
+                <div class="premium-card free-plan">
+                    <h3>Plan Gratuito</h3>
+                    <p class="price">S/ 0 / mes</p>
+                    <ul>
+                        <li>Acceso al **Chatbot Legal Automatizado**</li>
+                        <li>Uso de la **Calculadora de Liquidación**</li>
+                        <li>Descarga de **Modelos Básicos de Documentos**</li>
+                        <li>Información general sobre derechos laborales</li>
+                    </ul>
+                    <a href="#registerModal" class="btn btn-secondary">Comenzar Gratis</a>
+                </div>
+
+                <div class="premium-card premium-plan">
+                    <h3>Plan Premium</h3>
+                    <p class="price">S/ 29.90 / mes</p>
+                    <ul>
+                        <li>**Asesoría legal 1 a 1 con abogados especializados.**</li>
+                        <li>**Asesoría legal específica para EMPRESAS** (cumplimiento normativo, gestión de personal, contratos).</li>
+                        <li>Acceso ilimitado a **todos los Modelos de Documentos Premium**.</li>
+                        <li>Soporte prioritario.</li>
+                        <li>Actualizaciones constantes sobre cambios en la normativa laboral.</li>
+                    </ul>
+                    <a href="#registerModal" class="btn btn-primary">Suscribirme al Plan Premium</a>
+                </div>
+
+                <div class="premium-card enterprise-plan">
+                    <h3>Asesoría para Empresas</h3>
+                    <p class="price">Consulta por Precios Personalizados</p>
+                    <ul>
+                        <li>Servicios legales a medida para PYMES y grandes empresas.</li>
+                        <li>Contratos laborales, auditorías de cumplimiento, procesos de despido.</li>
+                        <li>Capacitaciones in-company sobre normativa laboral.</li>
+                        <li>Gestión integral de relaciones laborales.</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-tertiary">Contáctanos para Empresas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 LegalWork. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#"><img src="https://via.placeholder.com/30" alt="Facebook"></a>
+                <a href="#"><img src="https://via.placeholder.com/30" alt="LinkedIn"></a>
+                <a href="#"><img src="https://via.placeholder.com/30" alt="Twitter"></a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <p class="modal-link">¿No tienes cuenta? <a href="#" id="showRegister">Regístrate aquí</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Registrarse</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nombre Completo:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <p class="modal-link">¿Ya tienes cuenta? <a href="#" id="showLogin">Inicia Sesión</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
