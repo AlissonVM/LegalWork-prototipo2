@@ -552,10 +552,6 @@ a {
     margin-top: auto; /* Asegura que el botón se pegue abajo */
 }
 
-.model-item .btn btn-secondary{
-    width: 100%; /* El botón ocupa todo el ancho de la tarjeta */
-    margin-top: auto; /* Asegura que el botón se pegue abajo si es necesario */
-
 .premium-card.free-plan {
     border: 2px solid var(--secondary-gold); /* Borde dorado para el plan gratuito */
 }
