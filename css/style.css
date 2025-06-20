@@ -84,7 +84,6 @@ a {
     cursor: not-allowed;
     background-color: var(--dark-gray); /* Gris para botones deshabilitados */
     color: var(--light-gray);
-    pointer-events: none; /* Evita que el clic se dispare aunque esté opaco */
 }
 
 
@@ -240,11 +239,6 @@ a {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
-    display: flex; /* Usamos flexbox */
-    flex-direction: column; /* Contenido en columna */
-    justify-content: flex-start; /* Alinea contenido al inicio */
-    align-items: center; /* Centra horizontalmente */
-    min-height: 220px; /* Asegura una altura mínima para la uniformidad */
 }
 
 .service-item:hover {
@@ -269,7 +263,6 @@ a {
 .service-item p {
     font-size: 1em;
     color: var(--dark-gray);
-    flex-grow: 1; /* Permite que el párrafo ocupe el espacio disponible */
 }
 
 
@@ -390,9 +383,8 @@ a {
     text-align: center;
     display: flex; /* Usar flexbox para alinear contenido */
     flex-direction: column;
-    justify-content: space-between; /* Empuja el botón hacia abajo y distribuye el espacio */
+    justify-content: space-between; /* Empuja el botón hacia abajo */
     transition: transform 0.3s ease;
-    min-height: 220px; /* Asegura una altura mínima para uniformidad visual */
 }
 
 .model-item:hover {
@@ -413,7 +405,7 @@ a {
 }
 
 /* Ajuste específico para los botones de descarga en la sección de modelos */
-.model-item .btn btn-secondary btn-download {
+.model-item .btn-download {
     width: 100%; /* El botón ocupa todo el ancho de la tarjeta */
     margin-top: auto; /* Asegura que el botón se pegue abajo si es necesario */
 }
@@ -503,10 +495,8 @@ a {
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     display: flex;
-    flex-direction: column; /* Organiza el contenido en columna */
-    justify-content: space-between; /* Distribuye el espacio y pega el botón abajo */
+    flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 400px; /* Ajusta esta altura para que todos los planes queden uniformes */
 }
 
 .premium-card:hover {
@@ -744,11 +734,6 @@ a {
     }
     .about-cards, .service-grid, .model-grid, .premium-plans-grid {
         grid-template-columns: 1fr;
-    }
-    /* Aseguramos la altura en mobile también para consistencia */
-    .service-item, .model-item, .premium-card {
-        min-height: auto; /* Permite que se ajusten naturalmente en móvil */
-        height: auto;
     }
     .main-footer .container {
         flex-direction: column;
