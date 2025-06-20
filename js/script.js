@@ -83,40 +83,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Funcionalidad del Chatbot ---
+   // --- Funcionalidad del Chatbot ---
+    const chatDisplay = document.getElementById('chatDisplay');
     const chatInput = document.getElementById('chatInput');
     const sendMessageBtn = document.getElementById('sendMessageBtn');
-    const chatDisplay = document.getElementById('chatDisplay');
 
-    function addMessage(text, sender) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-        messageElement.textContent = text;
-        chatDisplay.appendChild(messageElement);
-        chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll
+    function addMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${sender}-message`);
+        messageDiv.innerHTML = message; // Usar innerHTML para posibles enlaces o negritas
+        chatDisplay.appendChild(messageDiv);
+        chatDisplay.scrollTop = chatDisplay.scrollHeight; // Desplazar al final
     }
 
-    // Asegurarse de que los elementos existen antes de añadir listeners
-    if (sendMessageBtn && chatInput && chatDisplay) {
-        sendMessageBtn.addEventListener('click', () => {
-            const messageText = chatInput.value.trim();
-            if (messageText) {
-                addMessage(messageText, 'user');
-                chatInput.value = '';
-                // Simulación de respuesta del bot
-                setTimeout(() => {
-                    addMessage("Gracias por tu pregunta. Soy un asistente demostrativo. Para asesoría real, usa nuestros servicios Premium.", 'bot');
-                }, 1000);
-            }
-        });
+    // Lógica mejorada del chatbot (más respuestas, con enlaces y directivas)
+    sendMessageBtn.addEventListener('click', () => {
+        const userText = chatInput.value.trim();
+        if (userText) {
+            addMessage(userText, 'user');
+            chatInput.value = '';
 
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessageBtn.click();
-            }
-        });
-    }
+            // Simular respuesta del bot
+            setTimeout(() => {
+                let botResponse = "Lo siento, no tengo suficiente información para responder a eso. ¿Podrías ser más específico o preguntar sobre un tema general de derechos laborales? También puedes usar la <a href='#calculator'>calculadora</a> o ver los <a href='#models'>modelos</a>.";
+                const lowerCaseUserText = userText.toLowerCase();
+
+                if (lowerCaseUserText.includes('hola') || lowerCaseUserText.includes('qué tal') || lowerCaseUserText.includes('como estas')) {
+                    botResponse = "¡Hola! Soy tu asistente de LegalWork. ¿En qué puedo ayudarte hoy con tus derechos laborales? Puedes preguntarme sobre CTS, gratificaciones, vacaciones, contratos, o usar la <a href='#calculator'>calculadora</a>.";
+                } else if (lowerCaseUserText.includes('contrato')) {
+                    botResponse = "Un contrato de trabajo es un acuerdo entre empleador y empleado. Puede ser a plazo fijo o indefinido. ¿Necesitas saber sobre tipos de contrato o un <a href='#models'>modelo</a>?";
+                } else if (lowerCaseUserText.includes('liquidación') || lowerCaseUserText.includes('beneficios') || lowerCaseUserText.includes('me despidieron')) {
+                    botResponse = "Para calcular tu liquidación y beneficios, por favor usa nuestra <a href='#calculator'>Calculadora de Liquidación</a>. Necesitarás tu sueldo, fecha de inicio y fin de labores. Si te despidieron arbitrariamente, la indemnización es un cálculo aparte y complejo que no se incluye en la estimación de la calculadora gratuita.";
+                } else if (lowerCaseUserText.includes('renuncia')) {
+                    botResponse = "Si deseas presentar tu renuncia, te recomendamos revisar nuestra sección de <a href='#models'>Modelos Legales</a> donde encontrarás un formato. Recuerda que debe ser voluntaria y con anticipación.";
+                } else if (lowerCaseUserText.includes('cts')) {
+                    botResponse = "La CTS (Compensación por Tiempo de Servicios) es un beneficio social que te protege en caso de cese. Se deposita dos veces al año (Mayo y Noviembre). Nuestra <a href='#calculator'>calculadora</a> puede estimar tu CTS trunca, pero solo si trabajas <b>full-time</b>.";
+                } else if (lowerCaseUserText.includes('vacaciones')) {
+                    botResponse = "Tienes derecho a vacaciones pagadas después de un año de servicios efectivos. Si no las gozas, puedes tener derecho a vacaciones truncas al finalizar tu relación laboral. La <a href='#calculator'>calculadora</a> te ayudará a estimar el monto.";
+                } else if (lowerCaseUserText.includes('gratificaciones') || lowerCaseUserText.includes('grati')) {
+                    botResponse = "Las gratificaciones son beneficios que se pagan en Julio y Diciembre. Equivalen a un sueldo completo más una bonificación del 9% de tu sueldo (para Essalud). Para gratificaciones truncas, se calcula proporcional al tiempo trabajado en el periodo, pero solo si trabajas <b>full-time</b>. Usa la <a href='#calculator'>calculadora</a> para estimar.";
+                } else if (lowerCaseUserText.includes('premium') || lowerCaseUserText.includes('asesoría') || lowerCaseUserText.includes('abogado') || lowerCaseUserText.includes('consulta') || lowerCaseUserText.includes('empresa') || lowerCaseUserText.includes('plan')) {
+                    botResponse = "¡Claro! En <a href='#premium'>LegalWork Premium</a>, ofrecemos planes para trabajadores y asesoría especializada para empresas. Obtén consultas personalizadas, documentos avanzados y más.";
+                } else if (lowerCaseUserText.includes('gracias') || lowerCaseUserText.includes('muchas gracias') || lowerCaseUserText.includes('excelente')) {
+                    botResponse = "De nada. Me alegra poder ayudarte. Si tienes más dudas, no dudes en preguntar.";
+                } else if (lowerCaseUserText.includes('perfil') || lowerCaseUserText.includes('mi cuenta')) {
+                    botResponse = "Puedes gestionar tu información y suscripción en la sección 'Perfil'. Necesitarás iniciar sesión para acceder.";
+                } else if (lowerCaseUserText.includes('como funciona') || lowerCaseUserText.includes('que hacen')) {
+                    botResponse = "LegalWork es una plataforma que te orienta sobre tus derechos laborales. Ofrecemos un chatbot legal, una calculadora de liquidación, modelos de documentos y asesoría legal personalizada con nuestro plan Premium.";
+                } else if (lowerCaseUserText.includes('despido')) {
+                    botResponse = "Si has sido despedido, es importante conocer tus derechos. Dependiendo del tipo de despido, podrías tener derecho a una indemnización. Nuestra <a href='#calculator'>calculadora</a> no la estima porque es muy compleja y depende del caso. Te sugerimos revisar la sección <a href='#premium'>Premium</a> para asesoría personalizada.";
+                } else if (lowerCaseUserText.includes('asignación familiar') || lowerCaseUserText.includes('asig familiar')) {
+                    botResponse = "La asignación familiar es un beneficio que se paga a los trabajadores que tienen uno o más hijos menores de 18 años, o mayores si cursan estudios superiores y no tienen límite de edad si son hijos con discapacidad. Actualmente es de S/ 102.50. Nuestra <a href='#calculator'>calculadora</a> la considera si la marcas.";
+                }
+
+                addMessage(botResponse, 'bot');
+            }, 500); // Pequeño retraso para simular "pensamiento"
+        }
+    });
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessageBtn.click();
+        }
+    });
 
     // --- Funcionalidad de la Calculadora de Liquidación ---
     const calculateBtn = document.getElementById('calculateBtn');
