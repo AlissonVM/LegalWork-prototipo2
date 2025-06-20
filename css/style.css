@@ -413,7 +413,7 @@ a {
 }
 
 /* Ajuste específico para los botones de descarga en la sección de modelos */
-.model-item .btn-download {
+.model-item .btn btn-secondary btn-download {
     width: 100%; /* El botón ocupa todo el ancho de la tarjeta */
     margin-top: auto; /* Asegura que el botón se pegue abajo si es necesario */
 }
