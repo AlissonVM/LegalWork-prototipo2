@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
         chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll
     }
 
-    if (sendMessageBtn) {
+    // Asegurarse de que los elementos existen antes de añadir listeners
+    if (sendMessageBtn && chatInput && chatDisplay) {
         sendMessageBtn.addEventListener('click', () => {
             const messageText = chatInput.value.trim();
             if (messageText) {
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculateBtn = document.getElementById('calculateBtn');
     const calculatorResults = document.getElementById('calculatorResults');
 
-    if (calculateBtn) {
+    if (calculateBtn && calculatorResults) { // Asegurarse de que ambos elementos existan
         calculateBtn.addEventListener('click', () => {
             const salary = parseFloat(document.getElementById('salary').value);
             const hasFamilyAllowance = document.getElementById('hasFamilyAllowance').checked;
@@ -132,37 +133,49 @@ document.addEventListener('DOMContentLoaded', () => {
             const hasVacations = document.getElementById('hasVacations').checked;
 
             // Validaciones básicas
-            if (isNaN(salary) || salary <= 0 || !startDate || !endDate || startDate >= endDate) {
+            if (isNaN(salary) || salary <= 0 || !document.getElementById('startDate').value || !document.getElementById('endDate').value || startDate >= endDate) {
                 alert('Por favor, ingresa datos válidos para el cálculo (salario, fechas de inicio y fin).');
+                calculatorResults.style.display = 'none'; // Ocultar resultados si hay error
                 return;
             }
 
             const MS_PER_DAY = 1000 * 60 * 60 * 24;
-            const diffTime = Math.abs(endDate - startDate);
-            const diffDays = Math.ceil(diffTime / MS_PER_DAY);
+            
+            // Función para calcular la diferencia de meses y días entre dos fechas
+            function getMonthsAndDays(d1, d2) {
+                let year1 = d1.getFullYear();
+                let month1 = d1.getMonth();
+                let day1 = d1.getDate();
 
-            // Calcular tiempo de servicio en meses y días
-            let totalMonths = 0;
-            let current = new Date(startDate);
-            while (current < endDate) {
-                current.setMonth(current.getMonth() + 1);
-                if (current <= endDate) {
-                    totalMonths++;
-                } else {
-                    current.setMonth(current.getMonth() - 1);
-                    break;
+                let year2 = d2.getFullYear();
+                let month2 = d2.getMonth();
+                let day2 = d2.getDate();
+
+                let years = year2 - year1;
+                let months = month2 - month1;
+                let days = day2 - day1;
+
+                if (days < 0) {
+                    months--;
+                    let prevMonth = new Date(year2, month2, 0);
+                    days += prevMonth.getDate();
                 }
-            }
-            const remainingDays = Math.ceil(Math.abs(endDate - current) / MS_PER_DAY);
 
-            const yearsOfService = Math.floor(totalMonths / 12);
-            const monthsOfService = totalMonths % 12;
-            const daysOfService = remainingDays; // Días después de los meses completos
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+                return { years, months, days };
+            }
+
+            const { years, months, days } = getMonthsAndDays(startDate, endDate);
+            const totalMonthsCalculated = years * 12 + months; // Meses completos
+            const remainingDays = days; // Días restantes después de los meses completos
 
             let serviceTimeString = '';
-            if (yearsOfService > 0) serviceTimeString += `${yearsOfService} año(s) `;
-            if (monthsOfService > 0) serviceTimeString += `${monthsOfService} mes(es) `;
-            if (daysOfService > 0) serviceTimeString += `${daysOfService} día(s)`;
+            if (years > 0) serviceTimeString += `${years} año(s) `;
+            if (months > 0) serviceTimeString += `${months} mes(es) `;
+            if (remainingDays > 0) serviceTimeString += `${remainingDays} día(s)`;
             if (serviceTimeString === '') serviceTimeString = 'Menos de un día';
 
             document.getElementById('serviceTime').textContent = serviceTimeString.trim();
@@ -178,66 +191,64 @@ document.addEventListener('DOMContentLoaded', () => {
             let vacationsAmount = 0;
             let indemnizationAmount = 0;
 
-            // Cálculo de Vacaciones Truncas (proporcional al tiempo trabajado desde el último goce o inicio)
-            if (!hasVacations) { // Si no ha gozado o le han pagado las últimas vacaciones
-                const vacationMonthsWorked = totalMonths; // Meses completos
-                const vacationDaysWorked = daysOfService; // Días adicionales
-                
-                // Las vacaciones se generan por 12 meses de trabajo (1/12 de sueldo por mes completo)
-                // Se calcula por cada mes calendario completo de servicios.
-                if (vacationMonthsWorked > 0 || vacationDaysWorked > 0) {
-                    const dailySalary = salary / 30; // Sueldo diario
-                    // Calculo de vacaciones proporcionales: Sueldo / 12 meses * meses trabajados
-                    vacationsAmount = (salary / 12) * vacationMonthsWorked + (dailySalary / 12) * vacationDaysWorked; // Simplificado
-                }
+            // Cálculo de Vacaciones Truncas
+            // Proporcional al tiempo trabajado (desde el último goce o inicio de contrato)
+            // 1/12 de la RC por cada mes completo trabajado
+            if (!hasVacations) {
+                // Meses completos desde inicio o último goce
+                vacationsAmount = (remunerationComputable / 12) * totalMonthsCalculated;
+                // Días proporcionales
+                vacationsAmount += (remunerationComputable / 360) * remainingDays; // Suponemos 360 días en un año para cálculo diario
             }
 
             // Cálculo de Gratificaciones Truncas (Julio y Diciembre)
-            // Se calculan por cada mes calendario completo de servicio en el periodo de gratificación (Ene-Jun o Jul-Dic)
-            // Asumiendo que el cese es la fecha final del cálculo.
-            // Para simplificar, calcularemos en base a los meses de servicio total.
-            // La gratificación es un sueldo base + 9% de EsSalud (no incluimos EsSalud para simplificar el "neto" al trabajador)
-            // Cálculo: Sueldo / 6 * meses completos trabajados en el periodo
-            if (totalMonths > 0) {
-                // Periodo de gratificación más reciente
-                const endMonth = endDate.getMonth(); // 0-11
-                let monthsInGratPeriod = 0;
+            // 1/6 de la RC por cada mes completo trabajado en el semestre correspondiente
+            // Asumiendo que se calcula al cese.
+            let monthsForGratification = 0;
+            const endMonthIndex = endDate.getMonth(); // 0 = Enero, 11 = Diciembre
 
-                if (endMonth >= 0 && endMonth <= 5) { // Cese entre Enero y Junio (Gratificación de Julio)
-                    const startOfPeriod = new Date(endDate.getFullYear(), 0, 1); // 1 de Enero del año del cese
-                    const diffGratPeriod = Math.abs(endDate - startOfPeriod);
-                    monthsInGratPeriod = Math.floor(diffGratPeriod / (MS_PER_DAY * 30.4375)); // Meses completos
-                } else if (endMonth >= 6 && endMonth <= 11) { // Cese entre Julio y Diciembre (Gratificación de Diciembre)
-                    const startOfPeriod = new Date(endDate.getFullYear(), 6, 1); // 1 de Julio del año del cese
-                    const diffGratPeriod = Math.abs(endDate - startOfPeriod);
-                    monthsInGratPeriod = Math.floor(diffGratPeriod / (MS_PER_DAY * 30.4375)); // Meses completos
-                }
-                
-                gratificationAmount = (salary / 6) * monthsInGratPeriod;
+            if (endMonthIndex >= 0 && endMonthIndex <= 5) { // Periodo Enero-Junio
+                const periodStart = new Date(endDate.getFullYear(), 0, 1);
+                const { months: currentMonths, days: currentDays } = getMonthsAndDays(periodStart, endDate);
+                monthsForGratification = currentMonths;
+                if (currentDays > 0) monthsForGratification++; // Si hay días en el último mes, se considera mes completo
+            } else if (endMonthIndex >= 6 && endMonthIndex <= 11) { // Periodo Julio-Diciembre
+                const periodStart = new Date(endDate.getFullYear(), 6, 1);
+                const { months: currentMonths, days: currentDays } = getMonthsAndDays(periodStart, endDate);
+                monthsForGratification = currentMonths;
+                if (currentDays > 0) monthsForGratification++; // Si hay días en el último mes, se considera mes completo
+            }
+            
+            // La gratificación es la RC más el 9% de EsSalud para trabajadores del régimen privado.
+            // Aquí simplificaremos a solo la RC para dar un monto aproximado de lo que le correspondería "neto".
+            if (monthsForGratification > 0) {
+                 gratificationAmount = (salary / 6) * monthsForGratification;
             }
 
             // Cálculo de CTS Trunca
-            // Se calcula por cada mes calendario completo de servicios, más el porcentaje de los días.
-            // Es (Sueldo + Asignación Familiar) + 1/6 de gratificación / 12 * meses + (1/360 * días)
-            // Para simplificar, la RC ya incluye asignación familiar. No incluimos 1/6 de gratificación para simplificar.
-            if (!hasCTS) { // Si no ha recibido la última CTS (Mayo/Noviembre)
-                // Se consideran los meses completos y los días adicionales.
-                // Fórmula base: (Remuneración Computable Anual / 12) * meses + (Remuneración Computable Anual / 360) * días
-                // O simplificado: RC * (meses / 12 + días / 360)
-                ctsAmount = remunerationComputable * (totalMonths / 12 + daysOfService / 360);
+            // Se acumula a razón de 1/12 de la RC por cada mes calendario completo de servicios.
+            // Para la CTS, la RC es diferente (sueldo + 1/6 gratif. + asig. familiar)
+            // Simplificaremos la RC para CTS a (Sueldo + Asignación Familiar + (Sueldo/6 si aplica)).
+            // Para este cálculo rápido, usaremos la `remunerationComputable` que ya incluye Asignación.
+            if (!hasCTS) {
+                // Se considera la remuneración computable + 1/6 de gratificación.
+                // Para simplificar, asumiremos que la `remunerationComputable` que ya calculamos es la base.
+                // Fórmula: (RC / 12) por meses completos + (RC / 360) por días
+                ctsAmount = (remunerationComputable / 12) * totalMonthsCalculated + (remunerationComputable / 360) * remainingDays;
             }
             
             // Cálculo de Indemnización por Despido Arbitrario (Estimado simplificado)
             // 1.5 remuneraciones por cada año completo de servicio, con un tope de 12 remuneraciones.
-            // Para contratos a plazo indeterminado.
-            if (workType === 'full-time' && totalMonths >= 3) { // Asumiendo mínimo 3 meses para indemnización
-                indemnizationAmount = 1.5 * remunerationComputable * yearsOfService;
+            // Aplica para contratos a plazo indeterminado y despido sin causa justificada.
+            // Se considera la RC (que es sueldo + asignación familiar si aplica).
+            if (workType === 'full-time' && totalMonthsCalculated >= 3) { // Mínimo 3 meses para estabilidad relativa
+                indemnizationAmount = 1.5 * remunerationComputable * years; // Años completos
                 // Tope: 12 remuneraciones computables
                 if (indemnizationAmount > (12 * remunerationComputable)) {
                     indemnizationAmount = 12 * remunerationComputable;
                 }
             } else {
-                 indemnizationAmount = 0; // No aplica o es otro tipo de contrato
+                 indemnizationAmount = 0; // No aplica o es otro tipo de contrato/duración
             }
 
 
@@ -257,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.main-nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href && href.startsWith('#') && href !== '#registerModal') { // Excluir #registerModal
+            if (href && href.startsWith('#') && href !== '#registerModal' && href !== '#loginModal') { // Excluir #registerModal y #loginModal
                 e.preventDefault();
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
